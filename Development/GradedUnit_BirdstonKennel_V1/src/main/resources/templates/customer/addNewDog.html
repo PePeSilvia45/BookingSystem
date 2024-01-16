@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Add New Dog</title>
+  <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon}"/>
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+  <link th:href="@{/css/extra.css}" rel="stylesheet"/>
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <div class="container px-4">
+    <a class="navbar-brand" th:href="@{/public/home#page-top}">Birdston Kennel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+      class="navbar-toggler-icon"></span></button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#about}">About</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#availability}">Availability</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#contact}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/customer/make_booking}">MakeBooking</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/customer/view_bookings}">My Bookings</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/user/my_profile}">MyProfile</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/user/logout}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div>
+
+
+  <section class="container px-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+            <div class="card-body p-4 p-sm-5">
+              <h3 class="card-title text-center ">
+                Add New Dog
+              </h3>
+              <div>
+                <div th:if="${error == 'size'}" class="alert alert-danger">
+                  Please select a size from the dropdown list
+                </div>
+                <div th:if="${error == 'gender'}" class="alert alert-danger">
+                  Please select a gender from the dropdown list.
+                </div>
+                <div th:if="${error == 'spayed' or error == 'vaccinated'}" class="alert alert-danger">
+                  Please select a valid option from the drop-down lists
+                </div>
+                <div th:if="${error == 'contactNo'}" class="alert alert-danger">
+                  Please enter a valid number for your vet.
+                </div>
+                <div th:if="${error == 'weight'}" class="alert alert-danger">
+                  Dogs weight must be a number.<br>It can be a decimal!
+                </div>
+              </div>
+              <hr class="col-6 offset-3"/>
+              <form action="#" th:action="@{/customer/add_dog}" th:object="${new_dog_request}" method="post">
+                <div class="form-floating mb-3">
+                  <input th:field="*{dogName}" type="text" class="form-control" id="name" placeholder="Enter Name"
+                         required>
+                  <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input th:field="*{breed}" type="text" class="form-control" id="breed" placeholder="Enter Breed"
+                         required>
+                  <label for="breed">Breed</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input th:field="*{color}" type="text" class="form-control" id="color" placeholder="Enter Breed"
+                         required>
+                  <label for="color">Color</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <select th:field="*{size}" name="size" id="size" class="form-select form-control" required>
+                    <option value="">Select One</option>
+                    <option value="SMALL">Small</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="LARGE">Large</option>
+                    <option value="EXTRA_LARGE">Large</option>
+                  </select>
+                  <label for="size">Size</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <select th:field="*{sex}" name="gender" id="gender" class="form-select form-control" required>
+                    <option value="">Select One</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </select>
+                  <label for="gender">Gender</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input name="age" th:field="*{age}" type="text" class="form-control" id="age" placeholder="Enter Age"
+                         required>
+                  <label for="age">Age</label>
+                </div>
+
+                <hr class="col-6 offset-3"/>
+
+                <div class="form-floating mb-3">
+                  <select th:field="*{isSpayedNeutered}" name="spayedNeutered" id="spayedNeutered"
+                          class="form-select form-control" required>
+                    <option value="">Select One</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                  <label for="spayedNeutered">Is Spayed or Neutered?</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <select th:field="*{isVaccinated}" name="vaccinated" id="vaccinated" class="form-select form-control"
+                          required>
+                    <option value="">Select One</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                  <label for="vaccinated">Fully vaccinated?</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input th:feild="*{weight}" type="text" class="form-control" id="weight" placeholder="Enter Weight"
+                         name="weight" required>
+                  <label for="weight">Weight</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input th:feild="*{insuranceProvider}" type="text" class="form-control" id="insuranceProvider"
+                         name="insuranceProvider" placeholder="Enter Microchip Number" required>
+                  <label for="insuranceProvider">Insurance Provider</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input th:feild="*{microchipNumber}" type="text" class="form-control" id="microchipNumber"
+                         name="microchipNumber" placeholder="Enter Microchip Number" required>
+                  <label for="microchipNumber">Microchip Number</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <textarea th:field="*{medicalNotes}" type="text" name="currentMedication" id="currentMedication"
+                            class="form-control" style="height:100px;"></textarea>
+                  <label for="currentMedication">Detail any medication: ie, allergies, recent operations</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <textarea th:field="*{behaviouralNotes}" type="text" name="antisocialBehaviours"
+                            id="antisocialBehaviours" class="form-control" style="height:100px;"></textarea>
+                  <label for="antisocialBehaviours">Detail any antisocial behaviours</label>
+                </div>
+
+                <hr class="col-6 offset-3"/>
+                <h6 class="card-title text-center ">
+                  Vet Information
+                </h6>
+                <hr class="col-2 offset-5"/>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{vetName}" type="text" class="form-control" id="vet_name" placeholder="Vet Name"
+                         name="vetName" required>
+                  <label for="vet_name">Vet Name</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{practice}" type="text" class="form-control" id="practice" placeholder="Practice "
+                         name="practice" required>
+                  <label for="practice">Practice</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{contactNumber}" type="text" class="form-control" id="contact_number"
+                         placeholder="Contact Number"
+                         name="contactNumber" required>
+                  <label for="contact_number">Contact Number</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{addressLine1}" type="text" class="form-control" id="addressLine1"
+                         placeholder="Address Line 1"
+                         name="addressLine1" required>
+                  <label for="addressLine1">Address Line 1</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{addressLine2}" type="text" class="form-control" id="addressLine2"
+                         placeholder="Address Line 2"
+                         name="addressLine2" required>
+                  <label for="addressLine2">Address Line 1</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{town}" type="text" class="form-control" id="town" placeholder="Town"
+                         name="town" required>
+                  <label for="town">Town</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input th:feild="*{postcode}" type="text" class="form-control" id="postcode" placeholder="Postcode"
+                         name="postcode" required>
+                  <label for="postcode">Postcode</label>
+                </div>
+
+
+                <hr class="col-6 offset-3"/>
+
+                <div class="d-grid mb-2">
+                  <button class="btn btn-primary btn-login fw-bold text-uppercase" type="submit">Save Details</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Bootstrap core JS-->
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  <!-- Core theme JS-->
+  <script th:src="@{/js/scripts.js}"></script>
+  <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+</div>
+
+<hr/>
+<footer class="py-5 bg-dark">
+  <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; BirdstonKennels 2023</p></div>
+</footer>
+
+
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'></script>
+<script th:src="@{js/scripts.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "9330f66b44a5af00",
+    "type": "split",
+    "children": [
+      {
+        "id": "283d7b1240dfa6d4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b46a8383093f7503",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1-Planning/Project Brief.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "553ae1a1c39e221a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1-Planning/Functional & Non-functional Requirements.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c39edbbca3094014",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7b6996315b5dfee7",
+    "type": "split",
+    "children": [
+      {
+        "id": "f93fd528bf3bbdb0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c6a7082222b62d00",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "db8c278cd115c77d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#Plan",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a090abd86eb6bcc4",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "right": {
+    "id": "d3aa74d96e55c364",
+    "type": "split",
+    "children": [
+      {
+        "id": "399d19c79315d8ae",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cf3737f8e8bf3554",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1bdf69f00da9a1dd",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b47002f2470fe7ed",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "9719eb80e8d1228d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "c39edbbca3094014",
+  "lastOpenFiles": [
+    "1-Planning/Project Brief.md",
+    "2-Development/Development Stage.md",
+    "1-Planning/Planning Report.md",
+    "1-Planning/Functional & Non-functional Requirements.md",
+    "1-Planning/Final Questions.md",
+    "2-Development/Poco-Classes.md",
+    "1-Planning/Question Answers.md",
+    "1-Planning/Gantt Chart.md",
+    "Graded-Unit Introduction.md",
+    "1-Planning/Analysis and Design.md",
+    "Untitled.md",
+    "3-Evaluation/Evaluation Stage.md",
+    "2-Development/Testing Stage.md",
+    "1-Planning/Class Description.md",
+    "2-Development/database.md",
+    "1-Planning/Screen Layout.md",
+    "Untitled.canvas",
+    "README.md",
+    "().md",
+    "3-Evaluation",
+    "2-Development",
+    "1-Planning",
+    "2023-03-17.md",
+    "Untitled 1.canvas"
+  ]
+}

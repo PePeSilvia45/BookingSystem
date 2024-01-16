@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+
+  <title>Birdston Kennels</title>
+
+  <link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}"/>
+
+  <link th:href="@{/css/extra.css}" rel="stylesheet"/>
+  <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+  <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <div class="container px-4">
+    <a class="navbar-brand" href="/#page-top">Birdston Kennel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+      class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/dashboard}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/view_all_bookings}">View All Bookings</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/view_customers}">View Customers</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/my_profile}">My Profile</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/user/logout}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<section>
+  <div id="content-wrapper" class="d-flex flex-column col-10 offset-1">
+    <div id="content">
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold ">All Employees</h3>
+          </div>
+          <div class="card-body">
+
+            <div th:if="${msg == 'empCreated'}" class="alert alert-success">
+              New Employee Created
+            </div>
+            <a sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')"
+               class="btn btn-primary col-3 "
+               th:href="@{create_employee}">
+              Create New Employee
+            </a>
+            <br>
+            <br>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Address</th>
+                  <th>D.O.B</th>
+                  <th>Emergency Contact</th>
+                  <th sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')"></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Address</th>
+                  <th>D.O.B</th>
+                  <th>Emergency Contact</th>
+                  <th sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')"></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr th:each="emp : ${employees}">
+                  <td th:text="${emp.firstName} + ' ' + ${emp.lastName}"></td>
+                  <td th:text="${emp.role}"></td>
+                  <td th:text="${emp.email}"></td>
+                  <td th:text="${emp.phoneNumber}"></td>
+                  <td
+                    th:text="${emp.addressLine1}+', '+${emp.addressLine2}+', '+${emp.town}+', '+${emp.postcode}"></td>
+                  <td th:text="${emp.dob}"></td>
+                  <td th:text="${emp.emergencyContactName}+', '+${emp.emergencyContactNumber}"></td>
+                  <td sec:authorize="hasAuthority('MANAGER') or hasAuthority('ADMIN')">
+                    <a class="btn btn-primary btn-lg" th:href="@{employee/editemployee/{id}(id=${emp.id})}">EDIT</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<footer class="py-5 bg-dark">
+  <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; BirdstonKennels 2023</p></div>
+</footer>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>

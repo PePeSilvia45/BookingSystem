@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+
+  <title>Birdston Kennels</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/assets/favicon.png}"/>
+
+
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+  <link th:href="@{/css/extra.css}" rel="stylesheet"/>
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <div class="container px-4">
+    <a class="navbar-brand" th:href="@{/public/home#page-top}">Birdston Kennel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+      class="navbar-toggler-icon"></span></button>
+
+    <!--    UNAUTHENTICATED NAV BAD-->
+    <div class="collapse navbar-collapse" id="navbarResponsive" sec:authorize="!isAuthenticated()">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#about}">About</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#availability}">Availability</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#contact}">Contact</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/user/login}">Login</a></li>
+        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/user/register}">Register</a></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="container px-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6  mx-auto">
+        <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
+            <form th:action="@{/user/register}" th:object="${reg_form}" method="post">
+
+              <!--              error handling                  -->
+              <div>
+                <div th:if="${error == 'dob'}" class="alert alert-danger">
+                  Date of birth can't be in the future.
+                </div>
+                <div th:if="${error == 'email'}" class="alert alert-danger">
+                  Invalid email.
+                </div>
+                <div th:if="${error == 'confirmPassword'}" class="alert alert-danger">
+                  Passwords need to match.
+                </div>
+                <div th:if="${error == 'passwordLength'}" class="alert alert-danger">
+                  Passwords must be between 8 and 25 characters.
+                </div>
+                <div th:if="${error == 'passwordUpper'}" class="alert alert-danger">
+                  Passwords must have at least one capital letter.
+                </div>
+                <div th:if="${error == 'passwordLower'}" class="alert alert-danger">
+                  Passwords must have at least one lowercase letter.
+                </div>
+                <div th:if="${error == 'passwordDigit'}" class="alert alert-danger">
+                  Passwords must have at least one Digit.
+                </div>
+                <div th:if="${error == 'passwordSpecial'}" class="alert alert-danger">
+                  Passwords must have at least special character.
+                </div>
+                <div th:if="${error == 'passwordSpace'}" class="alert alert-danger">
+                  Passwords must have no spaces.
+                </div>
+                <div th:if="${error == 'phoneNumber'}" class="alert alert-danger">
+                  Phone number is not valid.
+                </div>
+                <div th:if="${error == 'emergencyContactNumber'}" class="alert alert-danger">
+                  Emergency Phone number is not valid.
+                </div>
+                <div th:if="${error == 'emailSendFail'}" class="alert alert-danger">
+                  Confirmation email failed to send, try again later.
+                </div>
+              </div>
+              <!--              end of error handling                  -->
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="firstname" placeholder="first name" th:field="*{firstName}"
+                       required>
+                <label for="firstname">First Name</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="lastname" placeholder="last name" th:field="*{lastName}"
+                       required>
+                <label for="lastname">Last Name</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="dob" placeholder="date of birth" th:field="*{dob}" required>
+                <label for="dob">Date of Birth</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" placeholder="name@example.com" th:field="*{email}"
+                       required>
+                <label for="email">Email address</label>
+              </div>
+
+
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"
+                       required>
+                <label for="password">Password</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"
+                       th:field="*{confirmPassword}" required>
+                <label for="confirmPassword">Confirm Password</label>
+              </div>
+
+              <hr>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="mobileNumber" placeholder="Mobile Number"
+                       th:field="*{phoneNumber}" required>
+                <label for="mobileNumber">Mobile Number</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="addressLine1" placeholder="Address Line 1"
+                       th:field="*{addressLine1}" required>
+                <label for="addressLine1">Address Line 1</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="addressLine2" placeholder="Address Line 2"
+                       th:field="*{addressLine2}" required>
+                <label for="addressLine2">Address Line 2</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="town" placeholder="Town" th:field="*{town}" required>
+                <label for="town">Town</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="postcode" placeholder="Postcode" th:field="*{postcode}"
+                       required>
+                <label for="postcode">Postcode</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="emergencyName" placeholder="Emergency Contact Name"
+                       th:field="*{emergencyContactName}" required>
+                <label for="emergencyName">Emergency Name</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="emergencyNumber" placeholder="Emergency Contact Number"
+                       th:field="*{emergencyContactNumber}" required>
+                <label for="emergencyNumber">Emergency Number</label>
+              </div>
+
+              <div class="d-grid mb-2">
+                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
+              </div>
+
+              <a class="d-block text-center mt-2 small" th:href="@{/user/login}">Have an account? Sign In</a>
+
+              <hr class="my-4">
+
+              <div class="d-grid mb-2">
+                <button class="btn btn-lg btn-google btn-login fw-bold text-uppercase" type="submit">
+                  <i class="fab fa-google me-2"></i> Sign up with Google
+                </button>
+              </div>
+
+              <div class="d-grid">
+                <button class="btn btn-lg btn-facebook btn-login fw-bold text-uppercase" type="submit">
+                  <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<hr/>
+<footer class="py-5 bg-dark">
+  <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; BirdstonKennels 2023</p></div>
+</footer>
+
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js'></script>
+<script th:src="@{js/scripts.js}"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Birdston Kennels</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/assets/favicon.png}"/>
+  Core theme CSS (includes Bootstrap)-->
+  <link th:href="@{/css/extra.css}" rel="stylesheet"/>
+  <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+  <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <div class="container px-4">
+    <a class="navbar-brand" th:href="@{/public/home#page-top}">Birdston Kennel</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false
+" aria-label="Toggle navigation"><span
+      class="navbar-toggler-icon"></span></button>
+    <!--    AUTHENTICATED CUSTOMER NAV BAR-->
+    <div class="collapse navbar-collapse" id="navbarResponsive" sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER') ">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#about}">About</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#availability}">Availability</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/public/home#contact}">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/customer/make_booking}">MakeBooking</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" ><a class="nav-link" th:href="@{/customer/my_profile}">MyProfile</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/user/logout}">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <!--    AUTHENTICATED EMPLOYEE NAV BAR-->
+    <div class="collapse navbar-collapse" id="navbarResponsive" sec:authorize="isAuthenticated() and !hasAuthority('CUSTOMER') ">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/dashboard}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/view_employees}">View Employees</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/employee/view_customers}">View Customers</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" ><a class="nav-link" th:href="@{/employee/my_profile}">MyProfile</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/user/logout}">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<section>
+  <div id="content-wrapper" class="d-flex flex-column col-10 offset-1">
+    <div id="content">
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h3 class="m-0 font-weight-bold ">All Bookings</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable">
+                <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Date Of Booking</th>
+                  <th>Date of Arrival</th>
+                  <th>Date of Departure</th>
+                  <th>Grooming Included</th>
+                  <th>Dogs On Booking</th>
+                  <th>Kennels On Booking</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Date Of Booking</th>
+                  <th>Date of Arrival</th>
+                  <th>Date of Departure</th>
+                  <th>Grooming Included</th>
+                  <th>Dogs On Booking</th>
+                  <th>Kennels On Booking</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr th:each="booking : ${all_bookings}" class="align-content-center">
+                  <td th:text="*{booking.customer.firstName + ' ' + booking.customer.lastName}"></td>
+                  <td th:text="*{{booking.timeOfBooking}}"></td>
+                  <td th:text="*{{booking.arrival}}"></td>
+                  <td th:text="*{{booking.departure}}"></td>
+                  <td th:text="*{booking.groomingIncluded}"></td>
+                  <td th:text="*{booking.dogsToString()}"></td>
+                  <td th:text="*{booking.kennelsToString()}"></td>
+                  <td th:text="*{booking.total}"></td>
+                  <td th:text="*{booking.status}"></td>
+                  <td style="width:140px;"><a th:href="@{/customer/view_booking/{id}(id=${booking.id})}" class="btn text-center btn-primary col-6 offset-3 text-center"
+                         style="height:35px;">View</a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<hr/>
+
+<footer class="py-5 bg-dark">
+  <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; BirdstonKennels 2023</p></div>
+</footer>
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>
